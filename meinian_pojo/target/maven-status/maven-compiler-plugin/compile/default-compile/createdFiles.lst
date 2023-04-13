@@ -1,0 +1,13 @@
+com\ischen\pojo\Member.class
+com\ischen\pojo\Order.class
+com\ischen\entity\QueryPageBean.class
+com\ischen\pojo\Permission.class
+com\ischen\pojo\TravelGroup.class
+com\ischen\pojo\Setmeal.class
+com\ischen\pojo\User.class
+com\ischen\pojo\Role.class
+com\ischen\entity\Result.class
+com\ischen\entity\PageResult.class
+com\ischen\pojo\Menu.class
+com\ischen\pojo\OrderSetting.class
+com\ischen\pojo\TravelItem.class

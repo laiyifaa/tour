@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ischen.dao.UserDao">
+
+    <resultMap id="userMap" type="user">
+        <id column="id" property="id"></id>
+        <result column="birthday" property="birthday"></result>
+        <result column="gender" property="gender"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="remark" property="remark"></result>
+        <result column="station" property="station"></result>
+        <result column="telephone" property="telephone"></result>
+        <collection property="roles" column="id"
+        select="com.ischen.dao.RoleDao.findRolesByUserId"></collection>
+    </resultMap>
+
+
+
+
+    <select id="findUserByUsername" parameterType="string" resultMap="userMap">
+       select * from t_user where username=#{username}
+    </select>
+
+</mapper>

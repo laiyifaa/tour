@@ -297,6 +297,7 @@
                 //分页查询
                 findPage() {
                    // 携带参数
+                   // 携带参数
                    var param ={
                        // 当前页面 默认值1
                        currentPage: this.pagination.currentPage,
@@ -359,12 +360,26 @@
 						center: true
 					}).then(() => {
 						// 发送ajax请求，执行删除
+                       // alert(row.id)
+                        axios.get("/travelItem/delete.do?id="+row.id).then((response)=>{
+                            if (response.data.flag){
+                                // 删除成功
+                                this.$message({
+                                    message:response.data.message,
+                                    type:'success'
+                                })
+                                // 删除完成之后，刷新页面
+                                this.findPage()
+                            }else {
+                                this.$message({
+                                    message:response.data.message,
+                                    type:'error'
+                                })
+                            }
+                        })
 
 
-						this.$message({
-							type: 'success',
-							message: '删除成功!'
-						});
+
 					}).catch(() => {
 						this.$message({
 							type: 'info',

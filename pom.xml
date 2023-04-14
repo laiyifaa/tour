@@ -14,6 +14,8 @@
         <module>meinian_interface</module>
         <module>meinian_service</module>
         <module>meinian_web</module>
+        <module>meinian_jobs</module>
+        <module>meinian_mobile_web</module>
     </modules>
 
     <!--
@@ -201,6 +203,7 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
+
             <!--redis-->
             <dependency>
                 <groupId>redis.clients</groupId>
@@ -243,6 +246,17 @@
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
                 <version>1.4.01</version>
+            </dependency>
+            <!--阿里云服务器短信平台-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>3.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>1.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

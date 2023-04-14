@@ -37,6 +37,7 @@ public class MessageConstant {
     public static final String TELEPHONE_VALIDATECODE_NOTNULL = "手机号和验证码都不能为空";
     public static final String LOGIN_SUCCESS = "登录成功";
     public static final String VALIDATECODE_ERROR = "验证码输入错误";
+    public static final String SEND_SMS_ERROR = "验证码输入错误";
     public static final String QUERY_ORDER_SUCCESS = "查询预约信息成功";
     public static final String QUERY_ORDER_FAIL = "查询预约信息失败";
     public static final String QUERY_SETMEALLIST_SUCCESS = "查询套餐列表数据成功";
@@ -49,6 +50,7 @@ public class MessageConstant {
     public static final String ORDER_FULL = "预约已满";
     public static final String HAS_ORDERED = "已经完成预约，不能重复预约";
     public static final String ORDER_SUCCESS = "预约成功";
+    public static final String ORDER_FAIL = "预约失败";
     public static final String GET_USERNAME_SUCCESS = "获取当前登录用户名称成功";
     public static final String GET_USERNAME_FAIL = "获取当前登录用户名称失败";
     public static final String GET_MENU_SUCCESS = "获取当前登录用户菜单成功";

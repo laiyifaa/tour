@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ischen.dao.PermissionDao">
+
+    <select id="findPermissionsByRoleId" parameterType="int" resultType="permission">
+        select p.* from t_role_permission rp ,t_permission p where p.id=rp.permission_id and rp.role_id=#{roleId}
+    </select>
+
+
+</mapper>

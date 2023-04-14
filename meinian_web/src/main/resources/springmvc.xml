@@ -38,7 +38,7 @@
     <!--配置dubbo应用程序名称-->
     <dubbo:application name="meinian_web"></dubbo:application>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
-    <dubbo:annotation package="com.ischen.controller"></dubbo:annotation>
+    <dubbo:annotation package="com.ischen"></dubbo:annotation>
 
     <!--配置连接超时 启动时候不要检查-->
     <dubbo:consumer timeout="600000" check="false"></dubbo:consumer>
@@ -56,6 +56,10 @@
         <!-- 设定默认编码 -->
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+
+    <!--引入redis配置文件-->
+    <import resource="classpath:spring-redis.xml"></import>
+    <import resource="classpath:spring-security.xml"></import>
 
 
 

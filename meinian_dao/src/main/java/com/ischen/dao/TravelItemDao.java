@@ -3,6 +3,8 @@ package com.ischen.dao;
 import com.ischen.pojo.TravelItem;
 import com.github.pagehelper.Page;
 
+import java.util.List;
+
 /**
  * TravelItemDao
  *
@@ -18,6 +20,14 @@ public interface TravelItemDao {
     TravelItem findById(Integer id);
 
     void edit(TravelItem travelItem);
+
+    void deleteById(Integer id);
+
+    long findCountByTravelgroupTravelitem(Integer id);
+
+    List<TravelItem> findAll();
+
+    List<TravelItem> findTravelItemListById(Integer id);
 
 }
 

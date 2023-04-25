@@ -20,7 +20,6 @@ public class ClearImgJob {
     @Autowired
     private JedisPool jedisPool;
 
-
     /**
      * 半夜凌晨2点删除图片，维护网站
      */

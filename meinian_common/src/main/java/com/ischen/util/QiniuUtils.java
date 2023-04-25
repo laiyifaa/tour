@@ -10,6 +10,8 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -21,9 +23,9 @@ import java.io.InputStream;
  * @Description:
  */
 public class QiniuUtils {
-    public  static String accessKey = "dzpXBDSa3musX6U7Nq8v0fzv921stt-NnRLGhACK";
-    public  static String secretKey = "AB90WSgUo32gY87jOyOW2zVH97fz9wT9JWCpKEm-";
-    public  static String bucket = "java-03";
+    public  static String accessKey = "QEjWeSbb0QpUNRBPSFe2VlIJDKA4Ylcr6f9NQ2jO";
+    public  static String secretKey = "5g3qQ5BeWfq_r1q7Yi8v7c66rU9vgg_TQiWruWY9";
+    public  static String bucket = "ischen-new-demo";
 
     public static void upload2Qiniu(String filePath,String fileName){
         //构造一个带指定Zone对象的配置类
@@ -87,5 +89,40 @@ public class QiniuUtils {
             System.err.println(ex.code());
             System.err.println(ex.response.toString());
         }
+    }
+    @Test
+    public void uploadFile(){
+
+        Configuration cfg = new Configuration(Zone.zone2());
+
+        //...其他参数参考类注释
+        UploadManager uploadManager = new UploadManager(cfg);
+        //...生成上传凭证，然后准备上传
+        String accessKey = QiniuUtils.accessKey;
+        String secretKey = QiniuUtils.secretKey;
+        String bucket = QiniuUtils.bucket;
+        String localFilePath = "D:/2.jpg";
+        //默认不指定key的情况下，以文件内容的hash值作为文件名
+        String key = null;
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+
+
+        try {
+            Response response = uploadManager.put(localFilePath, key, upToken);
+            //解析上传成功的结果
+            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+            System.out.println(putRet.key);
+            System.out.println(putRet.hash);
+        } catch (QiniuException ex) {
+            Response r = ex.response;
+            System.err.println(r.toString());
+            try {
+                System.err.println(r.bodyString());
+            } catch (QiniuException ex2) {
+                //ignore
+            }
+        }
+
     }
 }

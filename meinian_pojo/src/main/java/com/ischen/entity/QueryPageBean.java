@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * QueryPageBean
  *
- * @Author: 马伟奇
+ * @Author: ischen
  * @CreateTime: 2021-06-29
  * @Description:
  *

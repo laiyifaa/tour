@@ -10,11 +10,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
-import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 /**
  * QiniuUtils
  *
@@ -90,7 +86,7 @@ public class QiniuUtils {
             System.err.println(ex.response.toString());
         }
     }
-    @Test
+   /* @Test
     public void uploadFile(){
 
         Configuration cfg = new Configuration(Zone.zone2());
@@ -124,5 +120,5 @@ public class QiniuUtils {
             }
         }
 
-    }
+    }*/
 }

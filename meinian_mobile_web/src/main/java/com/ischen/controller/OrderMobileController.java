@@ -1,11 +1,13 @@
 package com.ischen.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.aliyuncs.exceptions.ClientException;
 import com.ischen.constant.MessageConstant;
 import com.ischen.entity.Result;
 import com.ischen.pojo.Order;
 import com.ischen.service.OrderService;
 import com.ischen.util.RedisMessageConstant;
+import com.ischen.util.SMSUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +36,19 @@ public class OrderMobileController {
 
     @RequestMapping("/findById")
     public Result findById(Integer id){
-      Map map =   orderService.findById(id);
-      return new Result(true,MessageConstant.ORDER_SUCCESS,map);
+
+        Map map =null;
+        try{
+            map = orderService.findById4Detail(id);
+            //查询预约信息成功
+            return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
+        }catch (Exception e){
+            e.printStackTrace();
+            //查询预约信息失败
+            return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
+        }
+
+
     }
 
 
@@ -55,10 +68,27 @@ public class OrderMobileController {
             return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
         }
 
-        // 设置移动端下单
-        map.put("orderType", Order.ORDERTYPE_WEIXIN);
         // 提交订单
-        Result result =  orderService.order(map);
+        Result result = null;
+
+        try{
+            map.put("orderType", Order.ORDERTYPE_WEIXIN);
+            // 断点调试，查看map里面封装了哪些数据
+            result = orderService.order(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            //预约失败
+            return null;
+        }
+        if(result.isFlag()){
+            //预约成功，发送短信通知，短信通知内容可以是“预约时间”，“预约人”，“预约地点”，“预约事项”等信息。
+            String orderDate = (String) map.get("orderDate");
+            try {
+                SMSUtils.sendShortMessage(telephone,orderDate);
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
+        }
         return result;
 
     }

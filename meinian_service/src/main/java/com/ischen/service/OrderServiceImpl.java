@@ -142,4 +142,9 @@ public class OrderServiceImpl implements OrderService {
         Map map =  orderDao.findById(id);
         return map;
     }
+
+    @Override
+    public Map findById4Detail(Integer id) {
+        return orderDao.findById4Detail(id);
+    }
 }

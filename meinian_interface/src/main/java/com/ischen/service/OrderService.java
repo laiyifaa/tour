@@ -16,5 +16,8 @@ public interface OrderService {
 
     Map findById(Integer id);
 
+    //根据id查询预约信息，包括人信息、套餐信息
+    Map findById4Detail(Integer id);
+
 }
 

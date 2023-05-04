@@ -18,5 +18,7 @@ public interface OrderDao {
     void add(Order order);
 
     Map findById(Integer id);
+
+    Map findById4Detail(Integer id);
 }
 

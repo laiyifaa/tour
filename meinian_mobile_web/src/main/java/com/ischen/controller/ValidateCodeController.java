@@ -1,16 +1,17 @@
 package com.ischen.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.ischen.constant.MessageConstant;
 import com.ischen.entity.Result;
 import com.ischen.util.RedisMessageConstant;
+import com.ischen.util.SMSUtils;
 import com.ischen.util.ValidateCodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.JedisPool;
 
-import javax.swing.table.TableRowSorter;
-import java.lang.annotation.Retention;
+
 
 /**
  * ValidateCodeController
@@ -47,6 +48,16 @@ public class ValidateCodeController {
         // 生成短信验证码
         Integer code = ValidateCodeUtils.generateValidateCode(4);
         // 调用阿里云发送短信
+
+
+        try {
+            //发送短信
+            SMSUtils.sendShortMessage(telephone,code.toString());
+        } catch (ClientException e) {
+            e.printStackTrace();
+            //验证码发送失败
+            return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }
         System.out.println("code===" + code);
         // 验证码存入到redis 设置过期时间
         jedisPool.getResource().setex(telephone + RedisMessageConstant.SENDTYPE_ORDER,
